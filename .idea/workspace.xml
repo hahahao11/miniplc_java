@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edbf9080-f7cb-4b1b-ad35-12ea528851d5" name="Default Changelist" comment="" />
+    <list default="true" id="8397c38d-2df5-4bb7-8434-c9ebc2f5321b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeStyleSettingsInfer">
-    <option name="done" value="true" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -24,24 +21,22 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
-  <component name="ProjectId" id="1jlE97g8N1qZ2XKoeNU4McbQ2Zi" />
+  <component name="ProjectId" id="1jpXvhMFXqgdw3rcaE6yW9MHNkx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="edbf9080-f7cb-4b1b-ad35-12ea528851d5" name="Default Changelist" comment="" />
-      <created>1604370126822</created>
+      <changelist id="8397c38d-2df5-4bb7-8434-c9ebc2f5321b" name="Default Changelist" comment="" />
+      <created>1604502242434</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1604370126822</updated>
+      <updated>1604502242434</updated>
     </task>
     <servers />
   </component>
