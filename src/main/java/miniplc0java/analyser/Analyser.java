@@ -253,12 +253,14 @@ public final class Analyser {
             boolean initialized = false;
 
             // 下个 token 是等于号吗？如果是的话分析初始化
-            expect(TokenType.Equal);
-            initialized =true;
+            if(nextIf(TokenType.Equal)!=null){
+                initialized=true;
+                analyseExpression();
+            }
             //analyseExpression();
 
             // 分析初始化的表达式
-            var value = analyseExpression();
+            //var value = analyseExpression();
 
             // 分号
             expect(TokenType.Semicolon);
