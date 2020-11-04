@@ -202,10 +202,7 @@ public final class Analyser {
 
     private void analyseMain() throws CompileError {
         // 主过程 -> 常量声明 变量声明 语句序列
-        analyseConstantDeclaration();
-        analyseVariableDeclaration();
-        analyseStatementSequence();
-        //throw new Error("Not implemented");
+        throw new Error("Not implemented");
     }
 
     private void analyseConstantDeclaration() throws CompileError {
@@ -247,25 +244,20 @@ public final class Analyser {
             // 变量声明语句 -> 'var' 变量名 ('=' 表达式)? ';'
 
             // 变量名
-            var nameToken = expect(TokenType.Ident);
 
             // 变量初始化了吗
             boolean initialized = false;
 
             // 下个 token 是等于号吗？如果是的话分析初始化
-            expect(TokenType.Equal);
-            initialized =true;
-            //analyseExpression();
 
             // 分析初始化的表达式
-            var value = analyseExpression();
 
             // 分号
             expect(TokenType.Semicolon);
 
             // 加入符号表，请填写名字和当前位置（报错用）
-            String name = (String)nameToken.getValue();
-            addSymbol(name, initialized, false, /* 当前位置 */ nameToken.getStartPos());
+            String name = /* 名字 */ null;
+            addSymbol(name, false, false, /* 当前位置 */ null);
 
             // 如果没有初始化的话在栈里推入一个初始值
             if (!initialized) {
@@ -283,22 +275,13 @@ public final class Analyser {
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) {
                 // 调用相应的分析函数
-
                 // 如果遇到其他非终结符的 FIRST 集呢？
-                analyseAssignmentStatement();
-            }
-            else if(peeked.getTokenType() == TokenType.Semicolon){
-                expect(TokenType.Semicolon);
-            }
-            else if(peeked.getTokenType() == TokenType.Print){
-                analyseOutputStatement();
-            }
-            else {
+            } else {
                 // 都不是，摸了
                 break;
             }
         }
-        //throw new Error("Not implemented");
+        throw new Error("Not implemented");
     }
 
     private int analyseConstantExpression() throws CompileError {
@@ -351,26 +334,22 @@ public final class Analyser {
         // 赋值语句 -> 标识符 '=' 表达式 ';'
 
         // 分析这个语句
-        var nameToken = expect(TokenType.Ident);
 
         // 标识符是什么？
-        String name = (String)nameToken.getValue();
+        String name = null;
         var symbol = symbolTable.get(name);
         if (symbol == null) {
             // 没有这个标识符
-            throw new AnalyzeError(ErrorCode.NotDeclared, /* 当前位置 */ nameToken.getStartPos());
+            throw new AnalyzeError(ErrorCode.NotDeclared, /* 当前位置 */ null);
         } else if (symbol.isConstant) {
             // 标识符是常量
-            throw new AnalyzeError(ErrorCode.AssignToConstant, /* 当前位置 */  nameToken.getStartPos());
+            throw new AnalyzeError(ErrorCode.AssignToConstant, /* 当前位置 */ null);
         }
-        expect(TokenType.Equal);
-        analyseExpression();
-        expect(TokenType.Semicolon);
         // 设置符号已初始化
-        initializeSymbol(name, nameToken.getStartPos());
+        initializeSymbol(name, null);
 
         // 把结果保存
-        var offset = getOffset(name, nameToken.getStartPos());
+        var offset = getOffset(name, null);
         instructions.add(new Instruction(Operation.STO, offset));
     }
 
@@ -392,20 +371,14 @@ public final class Analyser {
         // 项 -> 因子 (乘法运算符 因子)*
 
         // 因子
-        analyseFactor();
 
         while (true) {
             // 预读可能是运算符的 token
-            Token op = peek();
-            if(op.getTokenType()!=TokenType.Mult && op.getTokenType()!=TokenType.Div){
-                break;
-            }
+            Token op = null;
 
             // 运算符
-            next();
 
             // 因子
-            analyseFactor();
 
             // 生成代码
             if (op.getTokenType() == TokenType.Mult) {
@@ -431,10 +404,9 @@ public final class Analyser {
 
         if (check(TokenType.Ident)) {
             // 是标识符
-            var nameToken = expect(TokenType.Ident);
 
             // 加载标识符的值
-            String name = (String) nameToken.getValue();
+            String name = /* 快填 */ null;
             var symbol = symbolTable.get(name);
             if (symbol == null) {
                 // 没有这个标识符
@@ -443,18 +415,15 @@ public final class Analyser {
                 // 标识符没初始化
                 throw new AnalyzeError(ErrorCode.NotInitialized, /* 当前位置 */ null);
             }
-            var offset = getOffset(name, nameToken.getStartPos());
+            var offset = getOffset(name, null);
             instructions.add(new Instruction(Operation.LOD, offset));
         } else if (check(TokenType.Uint)) {
             // 是整数
             // 加载整数值
-            int value = (int) expect(TokenType.Ident).getValue();
+            int value = 0;
             instructions.add(new Instruction(Operation.LIT, value));
         } else if (check(TokenType.LParen)) {
             // 是表达式
-            next();
-            analyseExpression();
-            expect(TokenType.RParen);
             // 调用相应的处理函数
         } else {
             // 都不是，摸了
