@@ -46,6 +46,7 @@ public class Tokenizer {
         //
         String temps = new String();
         Pos startpos = it.currentPos();
+        temps+=it.nextChar();
         while(Character.isDigit(it.peekChar())){
             temps+=it.nextChar();
         }
