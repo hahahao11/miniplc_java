@@ -103,7 +103,7 @@ public final class Analyser {
      * @throws CompileError 如果类型不匹配
      */
     private Token expect(TokenType tt) throws CompileError {
-        var token = peek();
+        var token= peek();
         if (token.getTokenType() == tt) {
             return next();
         } else {
